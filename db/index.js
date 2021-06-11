@@ -1,12 +1,12 @@
-const connection = require("./connection.js");
+const inquirer = require('inquirer');
+const mysql = require("mysql");
 const cTable = require("console.table");
-var mysql = require("mysql");
-var inquirer = require("inquirer");
+const connection = require("./connection.js");
 
 
 function runSearch() {
-  inquirer
-    .prompt({
+  inquirer.prompt([
+    {
       name: "action",
       type: "rawlist",
       message: "What would you like to do?",
@@ -19,9 +19,9 @@ function runSearch() {
         "Add Employee",
         "Update Employee Role",
         "Quit",
-      ],
-    })
-    .then(function (answer) {
+      ]
+    }
+  ]).then(answer => {
       switch (answer.action) {
         case "View All Departments":
           viewDepts();
@@ -54,9 +54,9 @@ function runSearch() {
         case "Quit":
           quit();
           break;
-      }
+      };
     });
-}
+};
 
 //view by department
   function viewDepts() {
@@ -215,9 +215,10 @@ function updateEmployeeRole() {
       console.log("Succesfully updated!");
       runSearch();
     })
-  })
-
   }
+
+  )}
+
 
 function quit() {
   process.quit();
