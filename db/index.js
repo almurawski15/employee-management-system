@@ -1,8 +1,18 @@
 const inquirer = require('inquirer');
-const mysql = require("mysql");
-const cTable = require("console.table");
 const connection = require("./connection.js");
+const logo = require("asciiart-logo");
+require("console.table");
 
+init();
+
+// Display logo text, load main prompts
+function init() {
+  const logoText = logo({ name: "Employee Manager" }).render();
+
+  console.log(logoText);
+
+  runSearch();
+}
 
 function runSearch() {
   inquirer.prompt([
@@ -19,7 +29,7 @@ function runSearch() {
         "Add Employee",
         "Update Employee Role",
         "Quit",
-      ]
+      ],
     }
   ]).then(answer => {
       switch (answer.action) {
@@ -217,11 +227,7 @@ function updateEmployeeRole() {
     })
   }
 
-  )}
+)}
 
-
-function quit() {
-  process.quit();
-}
 
 module.exports = runSearch;
